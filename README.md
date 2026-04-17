@@ -1,1 +1,1 @@
-mein erstes Git Projekt
+Wir erstellen eine erste einfache HTML Seite
