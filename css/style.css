@@ -7,6 +7,11 @@ h1{
 font-size: 88px;
 }
 
+h2{
+    font-size: 48px;
+    color: #378ffb;
+    font-weight: 300;
+}
 section{
 
     max-width: 50%;
