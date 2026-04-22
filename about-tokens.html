@@ -260,38 +260,134 @@ color-cta-background → Green/500
 
 
         <section>
-        <h2 class="heading-md fw-extrabold">Is this the same as Tailwind's utility classes?</h2>
-
-
-        <p>
-            <em>modifier classes is also tailwind style? tailwind way to organize?</em>
-        </p>
-        <p>
-            Yes, exactly — that's the core idea behind Tailwind. Small, single-purpose classes that you compose in HTML rather than writing custom CSS for every combination.
-        </p>
-        <p>
-            Tailwind just takes it much further — it generates hundreds of utility classes for everything (spacing, color, borders, shadows...) so you rarely write CSS at all.
-        </p>
-        <p>
-            What you're building is the same concept but hand-crafted and minimal — only the tokens and utilities your system actually needs. That's actually a great way to understand why Tailwind works before using it as a black box.
-        </p>
+        <h2 class="heading-md fw-extrabold">Tailwind is a token system — just not yours</h2>
 
         <p>
-            The class is now <em>intention-readable</em> (<code>body-lg</code> tells you what it is) but <em>value-opaque</em> (you can't see 20px/1.35 without jumping to <code>:root</code>). The raw version was the opposite — values visible, meaning implicit.
+            Once you understand tokens, Tailwind suddenly makes sense. Tailwind is not a different idea — it's the same idea, taken to its logical extreme.
         </p>
         <p>
-            This is why design systems always need two things together:
+            Someone built a complete token system — a full set of named values for spacing, color, typography, borders, shadows, everything — and then generated a utility class for every single one. Instead of writing <code>font-size: var(--font-size-lg)</code> in CSS, you write <code>text-lg</code> directly in HTML. The token is baked into the class name.
         </p>
-        <ul>
-            <li>The token file (<code>:root</code>) as the source of truth</li>
-            <li>Documentation or Figma as the readable reference</li>
-        </ul>
+
+        <h3>The parallel is exact</h3>
+        <dl>
+            <dt>Your token system</dt>
+            <dd><code>--font-size-lg: 52px</code> defined in <code>:root</code>, used via <code>var(--font-size-lg)</code> in CSS</dd>
+            <dt>Tailwind</dt>
+            <dd><code>font-size-lg: 52px</code> defined in Tailwind's config, used via <code>text-lg</code> in HTML</dd>
+        </dl>
+
         <p>
-            When you're deep in CSS and want to know "what size is <code>body-lg</code>?" — you look at <code>:root</code>, or eventually at the Figma file where Body/lg = 20px is right there visually.
+            Same indirection. Same one-place-to-change principle. Tailwind just moves the usage point from CSS into HTML, and pre-generates all the classes so you rarely write CSS at all.
+        </p>
+
+        <h3>The trade-off of naming</h3>
+        <p>
+            Whether you use your own tokens or Tailwind's, the trade-off is the same. A class like <code>body-lg</code> or <code>text-lg</code> is <em>intention-readable</em> — it tells you what it is. But it is also <em>value-opaque</em> — you can't see the actual size without looking it up. A raw value like <code>20px</code> is the opposite: the value is right there, but the meaning is invisible.
         </p>
         <p>
-            The abstraction cost is real but it's a one-time learning curve. After a week you stop thinking <code>body-lg = 20px</code> and start thinking <code>body-lg = comfortable reading size</code>. That's actually the goal — thinking in scale, not pixels.
+            This is why token systems always need two things together: the token definitions as the source of truth, and documentation or Figma as the readable reference. After a while you stop thinking <code>text-lg = 20px</code> and start thinking <code>text-lg = comfortable reading size</code>. That's the goal — thinking in scale, not pixels.
         </p>
-    </section>
+
+        <aside>
+            <h4>The key difference</h4>
+            <p>
+                Tailwind's tokens are someone else's decisions. Your token system is your own. Tailwind works well until your design needs something it didn't anticipate. Understanding tokens means you know exactly what Tailwind is doing — and when to go beyond it.
+            </p>
+        </aside>
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">Tailwind in the real world — what this means for designers</h2>
+
+        <p>
+            A lot of agencies use Tailwind, and for good reason. Every project has different developers, different timelines, different codebases. Building a custom token system from scratch every time is expensive. Tailwind gives them a solid, pre-built token system that every developer already knows. Onboarding a new developer? They know Tailwind. No documentation needed.
+        </p>
+        <p>
+            As a designer, "we're using Tailwind" is something you'll hear in project meetings. Knowing what it means changes how you work.
+        </p>
+
+        <h3>When working with a Tailwind project</h3>
+        <p>
+            Your Figma tokens need to match Tailwind's scale — or the handoff breaks. If your design uses <code>16px</code> spacing but Tailwind's nearest step is <code>14px</code> or <code>20px</code>, a developer will either bend the design or go off-script and customise Tailwind's config. Knowing this in advance saves a lot of friction. Design to the scale that exists in the codebase, or agree up front that the config will be customised.
+        </p>
+
+        <h3>Tailwind is configurable</h3>
+        <p>
+            Agencies that care about design quality don't always use Tailwind's default values. They customise Tailwind's config file with their own — their own spacing scale, their own type scale, their own color palette. The framework stays Tailwind, but the tokens become theirs. This is the middle ground between a fully custom system and pure off-the-shelf.
+        </p>
+        <p>
+            When this happens, your Figma variables should mirror that custom config exactly. The token names in Figma and the token names in Tailwind's config should match. That alignment is what makes design-to-code handoff smooth.
+        </p>
+
+        <aside>
+            <h4>The practical takeaway</h4>
+            <p>Always ask early: are you using Tailwind's default scale, or a custom config?</p>
+            <p>If the team uses <strong>Tailwind's default scale</strong>, your Figma variables should mirror the values Tailwind ships with — <code>space-4 = 16px</code>, <code>text-lg = 18px</code>, and so on. You don't invent your own scale. You match theirs.</p>
+            <p>If the team uses a <strong>custom Tailwind config</strong>, someone has already defined their own values in that config file. Your Figma variables should mirror those custom values exactly — same names, same numbers.</p>
+            <p>Either way, your Figma variables are not free to be anything you want. They need to reflect what's actually in the code. If they don't match, design and code drift apart and every handoff becomes a negotiation. If no one has asked that question yet — ask it. It's a design systems decision, and it's yours to care about.</p>
+        </aside>
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">A real example: joining a project using shadcn — no Figma file</h2>
+
+        <p>
+            You get called into a project. The team is already building with <strong>shadcn/ui</strong>. No Figma file exists. They need design solutions. Where do you start?
+        </p>
+        <p>
+            This is a situation where understanding tokens is not theoretical — it's the only way to work correctly.
+        </p>
+
+        <h3>What is shadcn?</h3>
+        <p>
+            shadcn/ui is a component library built on top of Tailwind. But it adds something important: it uses CSS custom properties for its core design tokens, especially colors. So it is a layer on top of Tailwind — not plain Tailwind.
+        </p>
+        <p>The shadcn color system looks like this in CSS:</p>
+        <pre>
+--background: 0 0% 100%;
+--foreground: 222.2 84% 4.9%;
+--primary: 222.2 47.4% 11.2%;
+--primary-foreground: 210 40% 98%;
+        </pre>
+        <p>
+            These are CSS custom properties — tokens — that shadcn components use internally. When a button changes color, it is because <code>--primary</code> changed. Not a Tailwind class. Not a hex value. A token.
+        </p>
+
+        <h3>So do all your Figma tokens have to be Tailwind tokens?</h3>
+        <p>
+            No — because you are actually dealing with two layers at once, and they work differently:
+        </p>
+        <dl>
+            <dt>Layer 1 — shadcn's semantic tokens</dt>
+            <dd>
+                The CSS custom properties above. These control the actual component appearance — backgrounds, borders, foreground colors. These you must match in Figma, because changing a button color means changing <code>--primary</code>, not a Tailwind class. These become your Figma variables.
+            </dd>
+            <dt>Layer 2 — Tailwind's scale</dt>
+            <dd>
+                Spacing, typography, sizing. Layout and component dimensions follow Tailwind's steps. These you should also respect in Figma, so your spacing and type decisions translate cleanly into code.
+            </dd>
+        </dl>
+
+        <h3>The workflow</h3>
+        <p>Starting from scratch on a shadcn project without a Figma file, this is the order of operations:</p>
+        <ol>
+            <li>Open the shadcn CSS variables — those become your Figma color variables. Match them exactly: same names, same values.</li>
+            <li>Check the Tailwind config — default or custom? That becomes your spacing and type scale in Figma.</li>
+            <li>Build your Figma system to mirror both layers. Now your design tokens and the codebase speak the same language.</li>
+        </ol>
+
+        <aside>
+            <h4>Note</h4>
+            <p>
+                There is an official shadcn Figma community file. But starting without it and mapping the tokens yourself is a valuable exercise — it forces you to understand what is underneath the components, rather than just copying styles. Once you have done it once, you understand what any component library is doing under the hood.
+            </p>
+        </aside>
+
+        </section>
 </body>
 </html>

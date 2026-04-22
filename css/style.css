@@ -5,6 +5,7 @@
   --color-text: #11171F;
   --color-text-muted: #6b7280;
   --color-accent: #FF3F66;
+  --color-surface: #f4f4f4;
   
   --font-heading: 'Recursive', sans-serif;
   --font-display: 'Inter Tight', sans-serif;
@@ -178,11 +179,19 @@ footer{
     font-size: 16px;
 }
 
+aside {
+    background-color: var(--color-surface);
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+}
+
 code {
-    background-color: #f0f0f0;
-    color: #d63384;
-    padding: 0.1em 0.4em;
-    border-radius: 3px;
+    display: inline-block;
+    font-size: 0.9em;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 0.1rem 0.2rem;
+    background-color: #0000000a;
 }
 
 .vokabel{
