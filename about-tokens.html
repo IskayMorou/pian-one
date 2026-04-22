@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About tokens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <h1 class="heading-lg fw-light">
+        What are tokens <span class="display-lg fw-bold block">in this context? </span>
+    </h1>
+    <section>
+
+        <h2 class="heading-md fw-extrabold">A named value that replaces a raw value</h2>
+        <p>
+            A token is a named value that replaces a raw value. Instead of <code>#FF3F66</code> scattered across 40 CSS rules, you have one name — <code>--color-accent</code> — and everything references that name. The token is the name.
+        </p>
+        <p>
+            <code>--color-bg</code>, <code>--color-text</code>, <code>--color-accent</code> — those are your tokens.
+        </p>
+
+        <p>
+            Heading/lg/Bold describes a combination of properties — size, weight, line-height. That's useful, but it sits one level above the tokens.
+        </p>
+
+        <p>The cleaner mental model has two layers:</p>
+        <dl>
+            <dt>Layer 1 — Tokens (the raw values)</dt>
+            <dd>
+                <pre>
+                   
+        font-family: Recursive
+        font-size-lg: 52px
+        font-weight-bold: 700
+               
+            </pre>
+            </dd>
+
+            <dt>Layer 2 — Text styles (combinations of tokens)</dt>
+
+            <dd>
+                <pre>
+        Heading/lg/Bold → Recursive, 52px, 700
+                </pre>
+            </dd>
+        </dl>
+
+        <p>
+            A token is a named value. The name is the token. The raw value is what the token holds.
+            So in Layer 1: 
+                font-size-lg: 52px
+
+                52px is the raw value. font-size-lg is the token. You never write 52px directly anywhere — you always 
+                write font-size-lg. That indirection is the whole point.
+        </p>
+
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">Is this the same as Tailwind's utility classes?</h2>
+
+
+        <p>
+            <em>modifier classes is also tailwind style? tailwind way to organize?</em>
+        </p>
+        <p>
+            Yes, exactly — that's the core idea behind Tailwind. Small, single-purpose classes that you compose in HTML rather than writing custom CSS for every combination.
+        </p>
+        <p>
+            Tailwind just takes it much further — it generates hundreds of utility classes for everything (spacing, color, borders, shadows...) so you rarely write CSS at all.
+        </p>
+        <p>
+            What you're building is the same concept but hand-crafted and minimal — only the tokens and utilities your system actually needs. That's actually a great way to understand why Tailwind works before using it as a black box.
+        </p>
+
+        <p>
+            The class is now <em>intention-readable</em> (<code>body-lg</code> tells you what it is) but <em>value-opaque</em> (you can't see 20px/1.35 without jumping to <code>:root</code>). The raw version was the opposite — values visible, meaning implicit.
+        </p>
+        <p>
+            This is why design systems always need two things together:
+        </p>
+        <ul>
+            <li>The token file (<code>:root</code>) as the source of truth</li>
+            <li>Documentation or Figma as the readable reference</li>
+        </ul>
+        <p>
+            When you're deep in CSS and want to know "what size is <code>body-lg</code>?" — you look at <code>:root</code>, or eventually at the Figma file where Body/lg = 20px is right there visually.
+        </p>
+        <p>
+            The abstraction cost is real but it's a one-time learning curve. After a week you stop thinking <code>body-lg = 20px</code> and start thinking <code>body-lg = comfortable reading size</code>. That's actually the goal — thinking in scale, not pixels.
+        </p>
+    </section>
+</body>
+</html>
