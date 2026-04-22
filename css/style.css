@@ -100,11 +100,12 @@ p, li {
     font-size: var(--body-md-size);
     line-height: var(--body-md-line-height);
     font-weight: var(--fw-regular);
-    margin-bottom: 1em;
+    margin-bottom: 1.625rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+     margin-bottom: 1.625rem;
 }
 
 .heading-lg {
