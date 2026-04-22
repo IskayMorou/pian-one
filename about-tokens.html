@@ -19,7 +19,7 @@
     </h1>
     <section>
 
-        <h2 class="heading-sm fw-extrabold">A named value that replaces a raw value</h2>
+        <h2 class="heading-md fw-extrabold">A named value that replaces a raw value</h2>
         <p>
             A token is a named value that replaces a raw value. Instead of <code>#FF3F66</code> scattered across 40 CSS rules, you have one name — <code>--color-accent</code> — and everything references that name. The token is the name.
         </p>
@@ -48,6 +48,26 @@ h1 {
         <p>
             The token is <code>--color-accent</code>. The raw value is <code>#FF3F66</code>. You never write the raw value directly. That’s the whole game.
         </p>
+
+        <aside>
+            <h4>What is a magic value?</h4>
+            <p>
+                A raw value written directly in code — with no name, no explanation, no connection to anything else — is called a <strong>magic value</strong> (sometimes magic number). It just appears. Like magic. No context, no chain.
+            </p>
+            <pre>
+/* magic value — why this color? what is it for? */
+color: #e53e3e;
+
+/* token — intention is clear, value lives in one place */
+color: var(--color-error);
+            </pre>
+            <p>
+                The “magic” is not a compliment. It means the value is opaque, disconnected, and fragile. Change your error color and you have to find every <code>#e53e3e</code> scattered across the codebase. There’s no chain to pull.
+            </p>
+            <p>
+                Tokens exist precisely to eliminate magic values. Every raw value gets a name, every name has a home, and nothing is written twice.
+            </p>
+        </aside>
 
         <h3>The two-layer model</h3>
         <p>
@@ -115,7 +135,7 @@ Heading/lg/Bold → Recursive, 52px, 700
         </section>
 
         <section>
-        <h2 class="heading-sm fw-extrabold">Why are there so many names for the same thing?</h2>
+        <h2 class="heading-md fw-extrabold">Why are there so many names for the same thing?</h2>
 
         <p>
             In CSS, <code>--color-accent: #FF3F66</code> is called a <strong>custom property</strong>. But everyone, including the MDN docs, also calls them <strong>CSS variables</strong>. Both names are correct for the same thing.
@@ -162,7 +182,7 @@ Heading/lg/Bold → Recursive, 52px, 700
 
 
         <section>
-        <h2 class="heading-sm fw-extrabold">So they are all variables — why introduce new words?</h2>
+        <h2 class="heading-md fw-extrabold">So they are all variables — why introduce new words?</h2>
 
         <h3>Why "custom property" instead of just "variable"?</h3>
         <p>
@@ -205,7 +225,7 @@ Heading/lg/Bold → Recursive, 52px, 700
 
 
         <section>
-        <h2 class="heading-sm fw-extrabold">Why define color primitives first — why not just name them by purpose?</h2>
+        <h2 class="heading-md fw-extrabold">Why define color primitives first — why not just name them by purpose?</h2>
 
         <p>
             Because the same raw color can serve many different purposes.
@@ -260,7 +280,7 @@ color-cta-background → Green/500
 
 
         <section>
-        <h2 class="heading-sm fw-extrabold">Tailwind is a token system — just not yours</h2>
+        <h2 class="heading-md fw-extrabold">Tailwind is a token system — just not yours</h2>
 
         <p>
             Once you understand tokens, Tailwind suddenly makes sense. Tailwind is not a different idea — it's the same idea, taken to its logical extreme.
@@ -300,7 +320,7 @@ color-cta-background → Green/500
 
 
         <section>
-        <h2 class="heading-sm fw-extrabold">Tailwind in the real world — what this means for designers</h2>
+        <h2 class="heading-md fw-extrabold">Tailwind in the real world — what this means for designers</h2>
 
         <p>
             A lot of agencies use Tailwind, and for good reason. Every project has different developers, different timelines, different codebases. Building a custom token system from scratch every time is expensive. Tailwind gives them a solid, pre-built token system that every developer already knows. Onboarding a new developer? They know Tailwind. No documentation needed.
@@ -334,7 +354,7 @@ color-cta-background → Green/500
 
 
         <section>
-        <h2 class="heading-sm fw-extrabold">A real example: joining a project using shadcn — no Figma file</h2>
+        <h2 class="heading-md fw-extrabold">A real example: joining a project using shadcn — no Figma file</h2>
 
         <p>
             You get called into a project. The team is already building with <strong>shadcn/ui</strong>. No Figma file exists. They need design solutions. Where do you start?
@@ -385,6 +405,83 @@ color-cta-background → Green/500
             <h4>Note</h4>
             <p>
                 There is an official shadcn Figma community file. But starting without it and mapping the tokens yourself is a valuable exercise — it forces you to understand what is underneath the components, rather than just copying styles. Once you have done it once, you understand what any component library is doing under the hood.
+            </p>
+        </aside>
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">Figma and CSS are two representations of the same system</h2>
+
+        <p>
+            When you define primitives and semantic tokens in Figma, you need to do the exact same work in CSS. Not similar work — the same work. Same layers, same names, same structure.
+        </p>
+        <p>
+            Figma is not the source that generates CSS. They are both expressions of one shared system, each in their own language.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Figma</th>
+                    <th>CSS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Collection: primitives</td>
+                    <td><code>/* primitives */</code> block in <code>:root</code></td>
+                </tr>
+                <tr>
+                    <td>Collection: semantic color</td>
+                    <td><code>/* semantic color */</code> block in <code>:root</code></td>
+                </tr>
+                <tr>
+                    <td><code>neutral/50 → #fcfcfc</code></td>
+                    <td><code>--neutral-50: #fcfcfc</code></td>
+                </tr>
+                <tr>
+                    <td><code>bg/page → neutral/50</code></td>
+                    <td><code>--color-bg-page: var(--neutral-50)</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>In CSS, both layers live in <code>:root</code>, separated by a comment:</p>
+        <pre>
+:root {
+
+  /* primitives */
+  --neutral-50: #fcfcfc;
+  --neutral-100: #fcfcfd;
+  --neutral-200: #f6f6f9;
+  /* ... all primitive steps */
+
+  /* semantic color */
+  --color-bg-page: var(--neutral-50);
+  --color-action-default: var(--cherry-punch-500);
+  --color-action-hover: var(--cherry-punch-600);
+  --color-action-pressed: var(--cherry-punch-700);
+  /* ... */
+
+}
+        </pre>
+
+        <p>
+            The primitives block is never used directly in your components. You never write <code>var(--neutral-50)</code> on a button. Only semantic tokens get used in components. The primitives just sit there as the stable foundation that semantic tokens point to.
+        </p>
+
+        <aside>
+            <h4>Why this matters</h4>
+            <p>
+                If you skip the primitive layer in CSS and write <code>--color-bg-page: #fcfcfc</code> directly, you don't actually have a two-layer system — you just have a list of semantic tokens with hardcoded values. The chain is broken. Change <code>neutral/50</code> in Figma and you still have to hunt down every hex value in CSS manually.
+            </p>
+            <p>
+                In professional teams, tools like <strong>Style Dictionary</strong> or <strong>Tokens Studio</strong> exist to keep Figma and CSS in sync automatically — so you don't have to maintain the same structure twice by hand. Emerging approaches using <strong>MCP</strong> (Model Context Protocol) go further — an AI agent with access to both Figma and the codebase can potentially sync tokens in real time, without a build pipeline. This is still early, but it's the direction things are moving.
+            </p>
+            <p>
+                Either way: understand the manual structure first. Knowing exactly what the sync should look like is what makes any tool — current or future — understandable and controllable.
             </p>
         </aside>
 
