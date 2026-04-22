@@ -1,15 +1,46 @@
 
 
 :root {
-  --color-bg-page: #fcfcfc;
-  --color-text: #11171F;
-  --color-text-muted: #6b7280;
-  --color-accent: #FF3F66;
-  --color-surface: #f4f4f4;
+
+/* PRIMITIVES */
+  --neutral-50: #fcfcfc;
+  --neutral-100: #fcfcfd;
+  --neutral-200: #f6f6f9;
+  --neutral-300: #f2f2f7;
+  --neutral-400: #e5e5ea;
+  --neutral-500: #d1d1d6;
+  --neutral-600: #c7c7cc;
+  --neutral-700: #aeaeb2;
+  --neutral-800: #8e8e93;
+  --neutral-900: #616166;
+  --neutral-950: #313133;
+  --neutral-black: #11171f;
+
+  --red-500: #FF3F66;
+  --purple-500: #b200ff;
+
+  --black-a04: rgba(0, 0, 0, 0.04);
+  --black-a75: rgba(0, 0, 0, 0.75);
+
+
+
+/* SEMANTIC TOKENS */
+
+  --color-bg-page: var(--neutral-50);
+  --color-text: var(--neutral-black);
+  --color-text-muted: var(--neutral-600);
+  --color-accent: var(--red-500);
+  --color-surface: var(--neutral-200);
+  --color-vokabel: var(--purple-500);
+  --color-code-text: var(--black-a75);
+  --color-code-bg: var(--black-a04);
+
+
   
   --font-heading: 'Recursive', sans-serif;
   --font-display: 'Inter Tight', sans-serif;
 
+  
   --heading-lg-size: 48px;
   --heading-lg-line-height: 1.167;
   --heading-lg-letter-spacing: -0.0121em;
@@ -47,8 +78,8 @@
     box-sizing: border-box;
 }
 body{
-    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
-    background-color: var(--color-bg);
+    font-family: var(--font-body);
+    background-color: var(--color-bg-page);
     color: var(--color-text);
 }
 
@@ -160,6 +191,7 @@ h1, h2, h3, h4, h5, h6 {
 .fw-light     { font-weight: var(--fw-light); }
 .fw-regular   { font-weight: var(--fw-regular); }
 .fw-medium    { font-weight: var(--fw-medium); }
+.fw-semibold  { font-weight: var(--fw-semibold); }
 .fw-bold      { font-weight: var(--fw-bold); }
 .fw-extrabold { font-weight: var(--fw-extrabold); }
 .fw-black     { font-weight: var(--fw-black); }
@@ -175,8 +207,8 @@ section{
 footer{
     text-align: center;
     padding: 20px;
-    background-color: #f8f8f8;
-    color: #333;
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
     font-size: 16px;
 }
 
@@ -190,14 +222,14 @@ code {
     display: inline-block;
     font-size: 0.9em;
     line-height: 1;
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--color-code-text);
     padding: 0.1rem 0.2rem;
-    background-color: #0000000a;
+    background-color: var(--color-code-bg);
 }
 
 .vokabel{
     font-size: 16px;
-    color: #b200ff;
+    color: var(--color-vokabel);
     font-weight: var(--fw-light);
     /* font-family: Georgia, 'Times New Roman', Times, serif; */
     font-style: italic;
