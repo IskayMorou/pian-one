@@ -27,41 +27,234 @@
             <code>--color-bg</code>, <code>--color-text</code>, <code>--color-accent</code> — those are your tokens.
         </p>
 
+        <p>In CSS, it looks like this:</p>
+        <pre>
+:root {
+  --color-accent: #FF3F66;
+}
+
+button {
+  background: var(--color-accent);
+}
+
+h1 {
+  color: var(--color-accent);
+}
+        </pre>
+
         <p>
-            Heading/lg/Bold describes a combination of properties — size, weight, line-height. That's useful, but it sits one level above the tokens.
+            Without the token, you’d have <code>#FF3F66</code> written out in 40 places. Change the brand color? Find and replace 40 times, hope you missed nothing. With the token, you change it in <strong>one place</strong> — <code>:root</code> — and everything updates.
+        </p>
+        <p>
+            The token is <code>--color-accent</code>. The raw value is <code>#FF3F66</code>. You never write the raw value directly. That’s the whole game.
         </p>
 
-        <p>The cleaner mental model has two layers:</p>
+        <h3>The two-layer model</h3>
+        <p>
+            There’s an important distinction between a token and a text style. A token is <strong>atomic</strong> — one name, one value. A text style is <strong>composite</strong> — it bundles multiple tokens together. They’re not the same thing, even though designers sometimes use “token” loosely to mean both.
+        </p>
         <dl>
-            <dt>Layer 1 — Tokens (the raw values)</dt>
+            <dt>Layer 1 — Tokens (atomic: one name, one value)</dt>
             <dd>
                 <pre>
-                   
-        font-family: Recursive
-        font-size-lg: 52px
-        font-weight-bold: 700
-               
-            </pre>
+font-family: Recursive
+font-size-lg: 52px
+font-weight-bold: 700
+                </pre>
             </dd>
-
-            <dt>Layer 2 — Text styles (combinations of tokens)</dt>
-
+            <dt>Layer 2 — Text styles (composite: a combination of tokens)</dt>
             <dd>
                 <pre>
-        Heading/lg/Bold → Recursive, 52px, 700
+Heading/lg/Bold → Recursive, 52px, 700
                 </pre>
             </dd>
         </dl>
 
         <p>
-            A token is a named value. The name is the token. The raw value is what the token holds.
-            So in Layer 1: 
-                font-size-lg: 52px
-
-                52px is the raw value. font-size-lg is the token. You never write 52px directly anywhere — you always 
-                write font-size-lg. That indirection is the whole point.
+            In Layer 1: <code>52px</code> is the raw value. <code>font-size-lg</code> is the token. You never write <code>52px</code> directly anywhere — you always write <code>font-size-lg</code>. That indirection is the whole point.
         </p>
 
+        <aside>
+            <h4>Common confusion</h4>
+            <p>
+                Designers often say "token" when they mean "text style." These are not the same thing.
+            </p>
+            <p>
+                A text style <em>uses</em> tokens. It is not itself a token.
+            </p>
+            <dl>
+                <dt><code>font-size-lg</code></dt>
+                <dd>A token. One name, one value.</dd>
+                <dt><code>Heading/lg/Bold</code></dt>
+                <dd>A text style. A bundle of tokens.</dd>
+            </dl>
+            <p>
+                When someone says "I tokenized my typography" they usually mean they created text styles — which is good, but it's one level above the tokens themselves.
+            </p>
+        </aside>
+
+        <aside>
+            <h4>What about Figma variables?</h4>
+            <p>
+                When you define variables in Figma — a Name and a Default value — you are declaring tokens. Same concept, different word.
+            </p>
+            <dl>
+                <dt>Figma variable: <code>Family Sans → Inter</code></dt>
+                <dd>Token. One name, one value.</dd>
+                <dt>CSS custom property: <code>--font-family-sans: Inter</code></dt>
+                <dd>Token. One name, one value.</dd>
+            </dl>
+            <p>
+                Figma also has <strong>styles</strong> (like text styles, color styles). Those are the composite layer — they bundle variables together. So Figma has both layers too, it just uses different words: <em>variables</em> instead of tokens, <em>styles</em> instead of text styles.
+            </p>
+            <p>
+                You'll also see groups in Figma with names like <strong>Primitives</strong>, <strong>Base</strong>, <strong>Global</strong>, or <strong>Foundation</strong>. These are just folder labels — organisational words someone chose to group things. They have no technical meaning. What's inside the folder are the tokens. The folder name is irrelevant to what they are.
+            </p>
+        </aside>
+
+        </section>
+
+        <section>
+        <h2 class="heading-md fw-extrabold">Why are there so many names for the same thing?</h2>
+
+        <p>
+            In CSS, <code>--color-accent: #FF3F66</code> is called a <strong>custom property</strong>. But everyone, including the MDN docs, also calls them <strong>CSS variables</strong>. Both names are correct for the same thing.
+        </p>
+        <p>So now you have:</p>
+        <ul>
+            <li>CSS: custom properties = CSS variables = tokens</li>
+            <li>Figma: variables = tokens</li>
+        </ul>
+        <p>
+            The word "variable" appears in both worlds and means the same underlying concept. But "variable" is also a general programming term — it just means "a named thing that holds a value." Which is exactly what a token is.
+        </p>
+        <p>
+            So <strong>token</strong>, <strong>variable</strong>, and <strong>custom property</strong> are all pointing at the same idea. They're just names from different communities — design systems people say "token", CSS people say "custom property" or "variable", Figma says "variable."
+        </p>
+
+        <table>
+            <caption>The same concept, three different vocabularies</caption>
+            <thead>
+                <tr>
+                    <th>What it is</th>
+                    <th>CSS name</th>
+                    <th>Figma name</th>
+                    <th>Design systems name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A named value</td>
+                    <td>custom property / variable</td>
+                    <td>variable</td>
+                    <td>token</td>
+                </tr>
+                <tr>
+                    <td>A bundle of named values</td>
+                    <td>—</td>
+                    <td>style</td>
+                    <td>text style</td>
+                </tr>
+            </tbody>
+        </table>
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">So they are all variables — why introduce new words?</h2>
+
+        <h3>Why "custom property" instead of just "variable"?</h3>
+        <p>
+            Because in CSS, "property" already has a specific meaning. <code>color</code>, <code>font-size</code>, <code>margin</code> — those are all CSS properties. They're built in, defined by the browser.
+        </p>
+        <p>
+            When you write <code>--color-accent</code>, you're creating <em>your own</em> property. A <strong>custom</strong> one. That's why the spec calls it a custom property — it fits precisely into CSS's existing vocabulary. You're extending the property system, not just storing a value.
+        </p>
+        <p>
+            "Variable" is the informal name that stuck because it's shorter and everyone already knew what a variable was from programming. But technically, in CSS, "custom property" is the correct term.
+        </p>
+
+        <h3>Why "token"? Where does that word come from?</h3>
+        <p>
+            "Token" comes from the design systems world, not CSS or programming. It was introduced to solve a communication problem between designers and developers.
+        </p>
+        <p>
+            A variable or custom property describes <em>what it is technically</em>. A token describes <em>what it is for</em>.
+        </p>
+        <ul>
+            <li><code>--color-accent</code> tells you it's a CSS custom property</li>
+            <li><code>color-accent</code> as a token tells you it's a shared, agreed-upon name that both Figma and CSS use — a contract between design and code</li>
+        </ul>
+        <p>
+            The word "token" signals that this name is <strong>system-level</strong> — it lives in both worlds and connects them. It's not just a CSS thing or a Figma thing. It belongs to the design system itself.
+        </p>
+
+        <h3>The short version</h3>
+        <dl>
+            <dt>Variable</dt>
+            <dd>What programmers call it. Generic, informal.</dd>
+            <dt>Custom property</dt>
+            <dd>What CSS calls it. Technically precise.</dd>
+            <dt>Token</dt>
+            <dd>What design systems call it. Purpose-driven, cross-tool.</dd>
+        </dl>
+        <p>Same thing. Three different angles on it.</p>
+
+        </section>
+
+
+        <section>
+        <h2 class="heading-md fw-extrabold">Why define color primitives first — why not just name them by purpose?</h2>
+
+        <p>
+            Because the same raw color can serve many different purposes.
+        </p>
+        <p>
+            Take <code>Green/500: #14AE5C</code>. Right now it's just a green. But in your system it might be used as the success state color, a button background, a positive trend indicator in a chart, or a badge color.
+        </p>
+        <p>
+            If you named it directly <code>color-success</code>, that works — until the day your brand changes and success becomes teal instead of green. Now you have to hunt down every place <code>color-success</code> was used and decide if it should change.
+        </p>
+
+        <h3>Every level is tokens</h3>
+        <p>
+            "Primitive" doesn't mean "not a token." It just means the first level of tokens — the raw ones, the ones that don't point at anything else yet. You could call them basic tokens, or start tokens. They are still tokens.
+        </p>
+        <p>
+            The system has two levels of tokens, each with a different job:
+        </p>
+        <dl>
+            <dt>Level 1 — Primitive tokens (what the color <em>is</em>)</dt>
+            <dd>
+                <pre>
+Green/500 → #14AE5C
+                </pre>
+                Just a color. No meaning yet. No purpose. Close to what a CSS custom property does in its simplest form.
+            </dd>
+            <dt>Level 2 — Semantic tokens (what the color <em>is for</em>)</dt>
+            <dd>
+                <pre>
+color-success → Green/500
+color-cta-background → Green/500
+                </pre>
+                Now it has meaning. It points to a primitive. This is where design decisions live.
+            </dd>
+        </dl>
+
+        <h3>The pointing is everything</h3>
+        <p>
+            A semantic token doesn't hold a raw value — it holds a <em>reference</em> to another token. That chain is what makes the system flexible. If you want to change your success color from green to teal, you change it in one place — the semantic token. The primitive stays untouched. All components that use <code>color-success</code> update automatically.
+        </p>
+        <p>
+            If you had skipped primitives and named everything directly, you'd have no stable layer to point to.
+        </p>
+
+        <aside>
+            <h4>The simplest way to remember it</h4>
+            <p>Primitive tokens answer <strong>what</strong>. Semantic tokens answer <strong>why</strong>. Same token concept. Two different jobs.</p>
+            <p>"Semantic" just means "relating to meaning." <code>Green/500</code> has no meaning on its own. <code>color-success</code> has meaning — it tells you why that color exists in your system.</p>
+        </aside>
 
         </section>
 
