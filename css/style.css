@@ -16,12 +16,60 @@
   --neutral-950: #313133;
   --neutral-black: #11171f;
 
-  --red-500: #FF3F66;
-  --purple-500: #b200ff;
+
+  --cherry-punch-50: #fff0f1;
+  --cherry-punch-100: #ffe2e6;
+  --cherry-punch-200: #ffcad3;
+  --cherry-punch-300: #ff9fae;
+  --cherry-punch-400: #ff6984;
+  --cherry-punch-500: #ff3f66;
+  --cherry-punch-600: #ed1148;
+  --cherry-punch-700: #c8083d;
+  --cherry-punch-800: #a8093a;
+  --cherry-punch-900: #8f0c38;
+  --cherry-punch-950: #630827;
+
+
+  --neon-lemon-100: #fdfff5;
+  --neon-lemon-200: #f7ffd6;
+  --neon-lemon-300: #eeffa8;
+  --neon-lemon-400: #e6ff83;
+  --neon-lemon-500: #dfff11;
+  --neon-lemon-600: #c2df00;
+  --neon-lemon-700: #a8c200;
+  --neon-lemon-800: #8da200;
+  --neon-lemon-900: #758700;
+  --neon-lemon-950: #2e3600;
+
+
+--mardigras-50: #fee6ff;
+--mardigras-100: #fcc6fb;
+--mardigras-200: #f9a4f7;
+--mardigras-300: #f480f3;
+--mardigras-400: #ed57ee;
+--mardigras-500: #e502e9;
+--mardigras-600: #b711ba;
+--mardigras-700: #8b148e;
+--mardigras-800: #611363;
+--mardigras-900: #3a0e3c;
+--mardigras-950: #190019;
+
+  --chinese-blue-50:  #ebf1ff;
+  --chinese-blue-100: #d8e2ff;
+  --chinese-blue-200: #b2c5ff;
+  --chinese-blue-300: #88a5fe;
+  --chinese-blue-400: #6387fe;
+  --chinese-blue-500: #3c66fe;
+  --chinese-blue-600: #0452d0;
+  --chinese-blue-700: #024094;
+  --chinese-blue-800: #012f66;
+  --chinese-blue-900: #001b3c;
+  --chinese-blue-950: #001127;
+
+
 
   --black-a04: rgba(0, 0, 0, 0.04);
   --black-a75: rgba(0, 0, 0, 0.75);
-
 
 
 /* SEMANTIC TOKENS */
@@ -29,16 +77,60 @@
   --color-bg-page: var(--neutral-50);
   --color-text: var(--neutral-black);
   --color-text-muted: var(--neutral-600);
-  --color-accent: var(--red-500);
+
+  --color-accent: var(--cherry-punch-500);
+
   --color-surface: var(--neutral-200);
   --color-vokabel: var(--purple-500);
   --color-code-text: var(--black-a75);
   --color-code-bg: var(--black-a04);
 
 
-  
+--color-text-link-default:  var(--chinese-blue-500);
+--color-text-link-hover:    var(--chinese-blue-600);
+--color-text-link-visited:  var(--chinese-blue-700);
+
+
+--rounded-lg:   8px;
+  --rounded-xl:   12px;
+  --rounded-2xl:  16px;
+
+
+/* action */
+--color-action-primary-default:          var(--cherry-punch-500);
+--color-action-primary-hover:            var(--cherry-punch-600);
+--color-action-primary-pressed:          var(--cherry-punch-700);
+--color-action-primary-focus:            var(--cherry-punch-500);
+--color-action-primary-focus-ring:       var(--cherry-punch-300);
+--color-action-primary-disabled:         var(--neutral-200);
+--color-action-primary-label:            var(--neutral-50);
+--color-action-primary-label-disabled:   var(--neutral-500);
+
+--color-action-secondary-default:        var(--neon-lemon-500);
+--color-action-secondary-hover:          var(--neon-lemon-600);
+--color-action-secondary-pressed:        var(--neon-lemon-700);
+--color-action-secondary-focus:          var(--neon-lemon-500);
+--color-action-secondary-focus-ring:     var(--neon-lemon-700);
+--color-action-secondary-disabled:       var(--neutral-200);
+--color-action-secondary-label:          var(--mardigras-700);
+--color-action-secondary-label-disabled: var(--neutral-500);
+
+
+  /* typography primitives */
+  --font-family-sans: 'Inter', sans-serif;
+
   --font-heading: 'Recursive', sans-serif;
   --font-display: 'Inter Tight', sans-serif;
+
+
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+
+  --line-height-sm: 16px;
+  --line-height-md: 20px;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
 
   
   --heading-lg-size: 48px;
@@ -204,6 +296,121 @@ section{
     margin: 0 auto;
     margin-bottom: 4rem;
 }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: var(--font-family-sans);
+    transition: background-color 120ms ease, outline-color 120ms ease;
+}
+
+.btn-primary {
+    background-color: var(--color-action-primary-default);
+    color: var(--color-action-primary-label);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.btn-secondary {
+    background-color: var(--color-action-secondary-default);
+    color: var(--color-action-secondary-label);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.btn-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+}
+
+.btn-md,
+.btn-lg {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--rounded-xl);
+}
+
+.btn-md { padding: 12px 24px; }
+.btn-lg { padding: 16px 32px; }
+
+
+.btn-primary:hover {
+  background-color: var(--color-action-primary-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--color-action-primary-pressed);
+}
+
+.btn-primary:focus-visible {
+  background-color: var(--color-action-primary-focus);
+  outline-color: var(--color-action-primary-focus-ring);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-action-secondary-hover);
+}
+
+.btn-secondary:active {
+  background-color: var(--color-action-secondary-pressed);
+}
+
+.btn-secondary:focus-visible {
+  background-color: var(--color-action-secondary-focus);
+  outline-color: var(--color-action-secondary-focus-ring);
+}
+
+.btn-primary:disabled {
+  background-color: var(--color-action-primary-disabled);
+  color: var(--color-action-primary-label-disabled);
+  cursor: not-allowed;
+}
+
+.btn-secondary:disabled {
+  background-color: var(--color-action-secondary-disabled);
+  color: var(--color-action-secondary-label-disabled);
+  cursor: not-allowed;
+}
+
+
+
+
+
+.link-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2); /* 8px — gap between text and chevron */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-link-default);
+  text-decoration: underline;
+  text-decoration-color: var(--color-text-link-default);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  cursor: pointer;
+}
+
+.link-cta:hover {
+  color: var(--color-text-link-hover);
+  text-decoration-color: var(--color-text-link-hover);
+}
+
+.link-cta:visited {
+  color: var(--color-text-link-visited);
+}
+
+
+
+
 footer{
     text-align: center;
     padding: 20px;
